@@ -35,16 +35,23 @@ class A
 private:
     /* data */
     int inner;
+    int w;
+    const int w_const;      //const member of varible must be initialized in initialized list
+    enum{size=100};         //??
+    int array[size];
+
 public:
-    A():inner(10){};
+    A():inner(10),w_const(9){};
     ~A(){};
-    int show() const    //the way to specify constant method
+    int show(/* const A* this*/) const    //the way to specify constant method
     {
 
         std::cout<<this->inner<<std::endl;
         //this->inner=100;  cannot work because obj cannot be changed
         return 0;};
-    int change(){return 0;};
+    int change(/* A* this */){return 0;};
+    int show(/* A* this */){};      //overload because no const
+
 };
 void main()
 {
